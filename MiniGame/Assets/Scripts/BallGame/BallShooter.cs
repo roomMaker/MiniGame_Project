@@ -4,15 +4,61 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Ball ball;
+
+    private List<Ball> balls = new List<Ball>();
+
+    private Vector2 _ballMoveVector;
+
+    private Camera _camera;
+
+    private bool _isReadyToShoot = false;
+
+    private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
+
+    private void Start()
     {
-        
+        _camera = Camera.main;
+
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+        balls.Add(GameObject.Instantiate(ball));
+
+        GameManager.Instance.IsReadyToShoot = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (!GameManager.Instance.IsReadyToShoot)
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameManager.Instance.IsReadyToShoot = false;
+            _ballMoveVector = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            StartCoroutine(ShootBalls());
+        }
+    }
+
+    private IEnumerator ShootBalls()
+    {
+        int index = 0;
+
+        while (index < balls.Count)
+        {
+            Debug.Log("¹ß½Î");
+            balls[index].IsShootedBall = true;
+            balls[index].MoveVector = _ballMoveVector;
+            index++;
+            yield return _waitForFixedUpdate;
+        }
     }
 }
