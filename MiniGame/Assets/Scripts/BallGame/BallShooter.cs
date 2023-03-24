@@ -12,8 +12,6 @@ public class BallShooter : MonoBehaviour
 
     private Camera _camera;
 
-    private bool _isReadyToShoot = false;
-
     private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
 
     private void Start()
