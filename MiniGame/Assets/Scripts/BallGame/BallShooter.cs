@@ -21,14 +21,6 @@ public class BallShooter : MonoBehaviour
         _camera = Camera.main;
 
         balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
-        balls.Add(GameObject.Instantiate(ball));
 
         GameManager.Instance.IsReadyToShoot = true;
     }
@@ -57,6 +49,12 @@ public class BallShooter : MonoBehaviour
             Debug.Log("¹ß½Î");
             balls[index].IsShootedBall = true;
             balls[index].MoveVector = _ballMoveVector;
+
+            if(index == balls.Count - 1)
+            {
+                balls[index].IsLastBall = true;
+            }
+
             index++;
             yield return _waitForFixedUpdate;
         }

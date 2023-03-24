@@ -7,4 +7,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     public Transform BallShooter;
 
     public bool IsReadyToShoot;
+
+    public void SetPositionBallShooter(Transform transform)
+    {
+        BallShooter.position = transform.position;
+    }
 }

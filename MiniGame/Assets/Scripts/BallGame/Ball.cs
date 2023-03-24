@@ -39,8 +39,9 @@ public class Ball : MonoBehaviour
 
             if (IsLastBall)
             {
-                GameManager.Instance.BallShooter.position = transform.position;
+                GameManager.Instance.SetPositionBallShooter(transform);
                 GameManager.Instance.IsReadyToShoot = true;
+                IsLastBall = false;
             }
            
         }
