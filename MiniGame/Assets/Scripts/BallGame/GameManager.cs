@@ -8,8 +8,17 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public bool IsReadyToShoot;
 
+    public int RoundCount = 1;
+
+    public void UpdateRound()
+    {
+        RoundCount++;
+    }
+
     public void SetPositionBallShooter(Transform transform)
     {
         BallShooter.position = transform.position;
     }
+
+
 }

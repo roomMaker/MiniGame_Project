@@ -27,7 +27,8 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Wall"))
+        // 공이 튕기는 처리
+        if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Block"))
         {
             MoveVector = Vector2.Reflect(MoveVector, collision.contacts[0].normal);
         }
@@ -40,6 +41,7 @@ public class Ball : MonoBehaviour
             if (IsLastBall)
             {
                 GameManager.Instance.SetPositionBallShooter(transform);
+                GameManager.Instance.UpdateRound();
                 GameManager.Instance.IsReadyToShoot = true;
                 IsLastBall = false;
             }
@@ -47,10 +49,12 @@ public class Ball : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 공 이동
+    /// </summary>
     private void Move()
     {
         transform.Translate(MoveVector.normalized * _speed * Time.deltaTime);
     }
-
 
 }

@@ -18,7 +18,7 @@ public class BallShooter : MonoBehaviour
     {
         _camera = Camera.main;
 
-        balls.Add(GameObject.Instantiate(ball));
+        AddBall();
 
         GameManager.Instance.IsReadyToShoot = true;
     }
@@ -38,6 +38,18 @@ public class BallShooter : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 공을 리스트에 추가
+    /// </summary>
+    private void AddBall()
+    {
+        balls.Add(GameObject.Instantiate(ball));
+    }
+
+    /// <summary>
+    /// 리스트에 있는 공의 갯수만큼 공을 발사하는 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ShootBalls()
     {
         int index = 0;
