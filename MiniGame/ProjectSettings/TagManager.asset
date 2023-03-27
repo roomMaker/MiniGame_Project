@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Ball
   - Block
+  - Item
   layers:
   - Default
   - TransparentFX

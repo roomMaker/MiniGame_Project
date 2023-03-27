@@ -41,7 +41,7 @@ public class BallShooter : MonoBehaviour
     /// <summary>
     /// 공을 리스트에 추가
     /// </summary>
-    private void AddBall()
+    public void AddBall()
     {
         balls.Add(GameObject.Instantiate(ball));
     }
@@ -67,6 +67,17 @@ public class BallShooter : MonoBehaviour
 
             index++;
             yield return _waitForFixedUpdate;
+        }
+    }
+
+    /// <summary>
+    /// 한 라운드 종료시 흩어진 공 한곳으로 모으는 함수
+    /// </summary>
+    public void SetBallsPosition()
+    {
+        foreach(Ball ball in balls)
+        {
+            ball.transform.position = balls[0].transform.position;
         }
     }
 }

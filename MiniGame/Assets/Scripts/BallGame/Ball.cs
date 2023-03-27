@@ -40,9 +40,7 @@ public class Ball : MonoBehaviour
 
             if (IsLastBall)
             {
-                GameManager.Instance.SetPositionBallShooter(transform);
-                GameManager.Instance.UpdateRound();
-                GameManager.Instance.IsReadyToShoot = true;
+                GameManager.Instance.InitRound(transform);
                 IsLastBall = false;
             }
            
