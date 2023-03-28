@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,11 +8,11 @@ public class Block : MonoBehaviour
 {
     private int BlockCount;
 
-    private Text BlockCountUIText;
+    private TextMeshProUGUI BlockCountUIText;
 
     private void OnEnable()
     {
-        BlockCountUIText = GetComponentInChildren<Text>();
+        BlockCountUIText = GetComponentInChildren<TextMeshProUGUI>();
         BlockCount = GameManager.Instance.RoundCount;
         SetBlockUI();
     }

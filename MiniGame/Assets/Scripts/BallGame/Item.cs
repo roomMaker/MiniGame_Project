@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
         if (collision.CompareTag("Ball"))
         {
             GameManager.Instance.AddBallInBallShooter();
+            GameManager.Instance.CurrentHaveBallCount++;
             gameObject.SetActive(false);
         }
     }

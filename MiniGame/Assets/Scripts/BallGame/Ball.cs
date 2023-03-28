@@ -11,8 +11,6 @@ public class Ball : MonoBehaviour
 
     private float _speed = 8f;
 
-    public bool IsLastBall = false;
-
     private void Start()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -27,6 +25,11 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(GameManager.Instance.IsFirstGroundedBall == false)
+        {
+            GameManager.Instance.FirstGroundedBallTransform = transform;
+            GameManager.Instance.IsFirstGroundedBall = true;
+        }
         // 공이 튕기는 처리
         if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Block"))
         {
@@ -37,11 +40,12 @@ public class Ball : MonoBehaviour
         {
             MoveVector = Vector2.zero;
             IsShootedBall = false;
+            GameManager.Instance.GroundedBallCount++;
 
-            if (IsLastBall)
+            if (GameManager.Instance.CurrentHaveBallCount == GameManager.Instance.GroundedBallCount)
             {
-                GameManager.Instance.InitRound(transform);
-                IsLastBall = false;
+                GameManager.Instance.InitRound(GameManager.Instance.FirstGroundedBallTransform);
+                GameManager.Instance.IsFirstGroundedBall = false;
             }
            
         }
