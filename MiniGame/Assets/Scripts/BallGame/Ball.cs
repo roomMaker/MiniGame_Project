@@ -45,6 +45,7 @@ public class Ball : MonoBehaviour
             if (GameManager.Instance.CurrentHaveBallCount == GameManager.Instance.GroundedBallCount)
             {
                 GameManager.Instance.InitRound(GameManager.Instance.FirstGroundedBallTransform);
+                GameManager.Instance.GroundedBallCount = 0;
                 GameManager.Instance.IsFirstGroundedBall = false;
             }
            
