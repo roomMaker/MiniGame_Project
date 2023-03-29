@@ -91,7 +91,6 @@ public class BallShooter : MonoBehaviour
 
         while (index < balls.Count)
         {
-            Debug.Log("¹ß½Î");
             balls[index].IsShootedBall = true;
             balls[index].MoveVector = _ballMoveVector;
             index++;
