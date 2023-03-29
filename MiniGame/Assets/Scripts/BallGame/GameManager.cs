@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
     public GameObject BallShooter;
     public Transform FirstGroundedBallTransform;
+
+    public Text CurrentRoundText;
 
     public bool IsReadyToShoot;
     public bool IsFirstGroundedBall;
@@ -35,6 +38,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         RoundCount++;
         _blockManager.GetComponent<BlockManager>().UpdateBlock();
+        SetRoundText();
     }
 
     /// <summary>
@@ -44,5 +48,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         BallShooter.GetComponent<BallShooter>().AddBall();
         GroundedBallCount++;
+    }
+
+    private void SetRoundText()
+    {
+        CurrentRoundText.text = $"현재 라운드 : {RoundCount}";
     }
 }
