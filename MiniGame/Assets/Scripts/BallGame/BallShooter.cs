@@ -13,6 +13,7 @@ public class BallShooter : MonoBehaviour
     private Vector3 _mouseDirection;
 
     private RaycastHit2D _ballHit;
+    private RaycastHit2D _gameOverHit;
 
     private LineRenderer _lineRenderer;
     private Camera _camera;
@@ -45,19 +46,11 @@ public class BallShooter : MonoBehaviour
             return;
         }
 
-        if(_lineRenderer.enabled == false)
-        {
-            _lineRenderer.enabled = true;
-        }
+
 
         _mouseDirection = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-        Debug.DrawRay(transform.position, _mouseDirection, Color.red);
-
-        _ballHit = Physics2D.Raycast(transform.position, _mouseDirection, 1000f, _layerMask);
-        
-        _lineRenderer.SetPosition(0, transform.position);
-        _lineRenderer.SetPosition(1, _ballHit.point);//_ballHit.point);
+        DrawLine();
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -74,6 +67,18 @@ public class BallShooter : MonoBehaviour
     public void AddBall()
     {
         balls.Add(GameObject.Instantiate(ball));
+    }
+
+    /// <summary>
+    /// 한 라운드 종료시 흩어진 공 한곳으로 모으는 함수
+    /// </summary>
+    public void SetBallsPosition()
+    {
+        foreach(Ball ball in balls)
+        {
+            ball.transform.position = GameManager.Instance.FirstGroundedBallTransform.position;
+        }
+        SetPositionBallShooter();
     }
 
     /// <summary>
@@ -94,17 +99,6 @@ public class BallShooter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 한 라운드 종료시 흩어진 공 한곳으로 모으는 함수
-    /// </summary>
-    public void SetBallsPosition()
-    {
-        foreach(Ball ball in balls)
-        {
-            ball.transform.position = GameManager.Instance.FirstGroundedBallTransform.position;
-        }
-        SetPositionBallShooter();
-    }
 
     /// <summary>
     /// 처음공이 떨어진 위치로 슈터위치 이동
@@ -113,5 +107,21 @@ public class BallShooter : MonoBehaviour
     private void SetPositionBallShooter()
     {
         transform.position = GameManager.Instance.FirstGroundedBallTransform.position;
+    }
+
+    /// <summary>
+    /// 점선 그려주는 함수
+    /// </summary>
+    private void DrawLine()
+    {
+        if (_lineRenderer.enabled == false)
+        {
+            _lineRenderer.enabled = true;
+        }
+
+        _ballHit = Physics2D.Raycast(transform.position, _mouseDirection, 1000f, _layerMask);
+
+        _lineRenderer.SetPosition(0, transform.position);
+        _lineRenderer.SetPosition(1, _ballHit.point);
     }
 }

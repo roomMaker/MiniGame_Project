@@ -53,10 +53,5 @@ public class Block : MonoBehaviour
         {
             HitBall();
         }
-
-        if (collision.collider.CompareTag("Ground"))
-        {
-
-        }
     }
 }

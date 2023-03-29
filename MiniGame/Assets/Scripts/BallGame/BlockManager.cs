@@ -42,6 +42,7 @@ public class BlockManager : MonoBehaviour
     private void MakeBlockLine()
     {
         randItemIndex = Random.Range(0, 5);
+
         for (int i = 0; i < _blockPosition.Length; ++i)
         {
             if (i == randItemIndex)

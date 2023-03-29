@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -9,6 +10,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     public Transform FirstGroundedBallTransform;
 
     public Text CurrentRoundText;
+
+    public GameObject GameOverUI;
 
     public bool IsReadyToShoot;
     public bool IsFirstGroundedBall;
@@ -20,6 +23,11 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     [SerializeField]
     private BlockManager _blockManager;
+
+    private void Start()
+    {
+        GameOverUI.SetActive(false);
+    }
 
     /// <summary>
     /// 라운드 초기화
@@ -48,6 +56,17 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         BallShooter.GetComponent<BallShooter>().AddBall();
         GroundedBallCount++;
+    }
+
+    public void GameOver()
+    {
+        GameOverUI.SetActive(true);
+        IsReadyToShoot = false;
+    }
+
+    public void ChangeScene(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 
     private void SetRoundText()

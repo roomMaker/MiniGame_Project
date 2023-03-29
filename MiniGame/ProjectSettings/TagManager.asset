@@ -9,6 +9,7 @@ TagManager:
   - Ball
   - Block
   - Item
+  - GameOver
   layers:
   - Default
   - TransparentFX
