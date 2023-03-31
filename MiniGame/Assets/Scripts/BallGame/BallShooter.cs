@@ -46,8 +46,6 @@ public class BallShooter : MonoBehaviour
             return;
         }
 
-
-
         _mouseDirection = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         DrawLine();
