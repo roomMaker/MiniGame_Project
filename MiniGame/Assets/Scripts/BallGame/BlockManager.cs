@@ -57,10 +57,6 @@ public class BlockManager : MonoBehaviour
             {
                 Instantiate(_block, _blockPosition[i].localPosition, Quaternion.identity, Blocks.transform);
             }
-            else
-            {
-                Instantiate(_emptyObject, _blockPosition[i].localPosition, Quaternion.identity, Blocks.transform);
-            }
         }
     }
 
