@@ -6,7 +6,7 @@ public class BallShooter : MonoBehaviour
 {
     public Ball ball;
 
-    private List<Ball> balls = new List<Ball>();
+    private List<Ball> _balls = new List<Ball>();
 
     private Vector2 _ballMoveVector;
 
@@ -64,7 +64,7 @@ public class BallShooter : MonoBehaviour
     /// </summary>
     public void AddBall()
     {
-        balls.Add(GameObject.Instantiate(ball));
+        _balls.Add(GameObject.Instantiate(ball));
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class BallShooter : MonoBehaviour
     /// </summary>
     public void SetBallsPosition()
     {
-        foreach(Ball ball in balls)
+        foreach(Ball ball in _balls)
         {
             ball.transform.position = GameManager.Instance.FirstGroundedBallTransform.position;
         }
@@ -87,10 +87,10 @@ public class BallShooter : MonoBehaviour
     {
         int index = 0;
 
-        while (index < balls.Count)
+        while (index < _balls.Count)
         {
-            balls[index].IsShootedBall = true;
-            balls[index].MoveVector = _ballMoveVector;
+            _balls[index].IsShootedBall = true;
+            _balls[index].MoveVector = _ballMoveVector;
             index++;
             yield return _waitForFixedUpdate;
         }
